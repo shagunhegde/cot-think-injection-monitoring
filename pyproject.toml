@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cot-injection-monitoring"
+version = "0.1.0"
+description = "Measuring CoT-monitoring robustness under reasoning-trace injection (Families A/B/C/D, length dose-response)."
+requires-python = ">=3.9"
+# Python 3.10+ recommended (Colab default). The pure-Python infra layer is tested on 3.9.
+
+# --- Core deps. Subject inference (torch/transformers/vllm) runs on Colab/GPU, not this Mac. ---
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# Installed on the GPU host (Colab/RunPod). Pinned loosely here; Colab pins exact versions in its setup cell.
+gpu = [
+    "torch>=2.1",
+    "transformers>=4.44",
+    "datasets>=2.20",
+    "accelerate>=0.33",
+]
+# vLLM is optional throughput path; HF Transformers is the control/fallback path.
+vllm = [
+    "vllm>=0.6.0",
+]
+# OpenRouter: one key reaches any open/closed model (attacker + monitor sweep).
+# openai SDK is the OpenAI-compatible client that OpenRouter exposes.
+openrouter = [
+    "openai>=1.0",
+]
+# Direct Anthropic API (kept as an alternative to OpenRouter).
+api = [
+    "anthropic>=0.40",
+    "openai>=1.0",      # also needed for OpenRouter
+]
+viz = [
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+]
+# Remote orchestration via RunPod + SSH.
+remote = [
+    "runpod>=1.6",
+    "paramiko>=3.0",
+    "python-dotenv>=1.0",
+]
+dev = [
+    "pytest>=7.4",
+    "python-dotenv>=1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

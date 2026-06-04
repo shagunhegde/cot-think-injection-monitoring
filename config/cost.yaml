@@ -1,0 +1,26 @@
+# Cost parameters — feeds estimate() in src/infra/cost.py.
+# Update these when you change models or when pricing changes.
+# All prices are USD per 1k tokens (Anthropic API pricing, approximate).
+
+# ── GPU time per subject generation (seconds) ─────────────────────────────────
+# Used to estimate total GPU-hours for Layer-3 (subject inference) work.
+# Measured on T4 with max_new_tokens=2048; scale down for shorter generations.
+sec_per_gen:
+  deepseek-r1-distill-qwen-1.5b: 15
+  deepseek-r1-distill-qwen-7b: 45
+  deepseek-r1-distill-qwen-14b: 120   # A100-class; not T4
+  qwen3-4b: 30
+
+# ── Judge / monitor calls (Layer 4 via Anthropic API) ────────────────────────
+# Two calls per condition: faithfulness judge + monitor (or more for variants).
+judge_avg_tokens: 500           # average tokens per call (prompt+completion)
+judge_price_per_1k: 0.00025     # claude-haiku via Anthropic API (approx.)
+
+# ── Prefill generation (Layer 2 via Anthropic API, Families B/C/D) ───────────
+# Family A is a free template; only B/C/D spend API budget.
+prefill_gen_avg_tokens: 1000    # average tokens per generated prefill
+prefill_gen_price_per_1k: 0.00025
+
+# ── Colab compute pricing reference (informational, not used in estimate()) ───
+# T4 Colab Pro+: ~free / included. RunPod T4: ~$0.20/hr. A100 40GB: ~$1.50/hr.
+# Use these manually to cross-check gpu_hours estimates from the cost report.

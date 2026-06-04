@@ -1,0 +1,53 @@
+# H1 — Injection length dose-response
+# Does monitorability degrade non-linearly with injection length?
+# Families: [B] — coherent wrong reasoning only (cheapest single-family run).
+# Lengths:  [100, 300, 700] — three-point dose-response curve.
+#
+# Usage (dry-run to confirm cost before spending):
+#   bash scripts/run_datagen.sh experiments/example_h1.yaml --dry-run
+#   bash scripts/run_datagen.sh experiments/example_h1.yaml all_datagen
+#   bash scripts/run_pipeline.sh experiments/example_h1.yaml
+
+run:
+  run_name: h1_deepseek_1.5b
+  results_dir: results
+  seed: 0
+
+data:
+  datasets: [mmlu]
+  n_items: 50
+  mmlu_subjects: all
+
+subjects: [deepseek-r1-distill-qwen-1.5b]
+
+attacker:
+  model: anthropic/claude-haiku-4.5      # OpenRouter ID
+  prompt_version: v1
+
+hypothesis: H1          # expands to families=[B], lengths=[100,300,700]
+
+attack:
+  targets: most_plausible
+  samples_per_condition: 1
+
+# ── Analysis ────────────────────────────────────────────────────────────────
+faithfulness:
+  enabled: true
+  model: anthropic/claude-haiku-4.5
+  prompt_version: v1
+
+monitor:
+  enabled: true
+  variants: [full_trace]
+  models:                                # weak → strong sweep
+    - qwen/qwen-2.5-1.5b-instruct        # scale-matched to subject (OpenRouter)
+    - anthropic/claude-haiku-4.5         # strong API monitor
+
+clean_fpr:  {enabled: true}
+metrics:    {enabled: true}
+plots:      {enabled: true}
+
+# ── Cost / safety ────────────────────────────────────────────────────────────
+cost:
+  dry_run: false
+  max_spend_usd: 20

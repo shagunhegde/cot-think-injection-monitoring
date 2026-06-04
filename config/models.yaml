@@ -1,0 +1,84 @@
+# Model configurations for subjects, judges/monitors, and generators.
+# All judge/monitor/generator calls use the Anthropic API (ANTHROPIC_API_KEY).
+# Subject inference runs on Colab/GPU via HuggingFace Transformers or vLLM.
+
+# ── Subject models (open-weight; run on GPU) ──────────────────────────────────
+# Key must match entries in experiment.yaml `models:` list.
+# Engineering constraints (§7):
+#   - DeepSeek: float16 on T4 (bf16 slow/unsupported); no system prompt; temp 0.6, top_p 0.95
+#   - Qwen3:    dtype=auto (bf16); fp16 → NaN/garbage on 4B; enable_thinking=True;
+#               temp 0.6, top_p 0.95, top_k 20
+#   - Qwen2.5-0.5B-Instruct is NOT a reasoning model — do not add it here as a subject.
+
+subjects:
+  deepseek-r1-distill-qwen-1.5b:
+    hf_id: deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+    dtype: float16            # bf16 slow/unsupported on T4
+    temperature: 0.6
+    top_p: 0.95
+    max_new_tokens: 2048
+    system_prompt: null       # §7: no system prompt for DeepSeek-R1-Distill
+
+  deepseek-r1-distill-qwen-7b:
+    hf_id: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+    dtype: float16
+    temperature: 0.6
+    top_p: 0.95
+    max_new_tokens: 2048
+    system_prompt: null
+
+  deepseek-r1-distill-qwen-14b:
+    hf_id: deepseek-ai/DeepSeek-R1-Distill-Qwen-14B
+    dtype: float16
+    temperature: 0.6
+    top_p: 0.95
+    max_new_tokens: 2048
+    system_prompt: null
+
+  qwen3-4b:
+    hf_id: Qwen/Qwen3-4B
+    dtype: auto               # bf16; fp16 NaNs on 4B — use "auto"
+    temperature: 0.6
+    top_p: 0.95
+    top_k: 20
+    max_new_tokens: 2048
+    enable_thinking: true     # Qwen3 hybrid-thinking mode
+
+# ── Judge / monitor / generator models (Anthropic API) ───────────────────────
+# model_id is the Anthropic model ID (e.g. "claude-3-5-haiku-20241022").
+# prompt_version is included in the Layer-4 cache key — bump it to invalidate old
+# judge outputs without touching GPU generations.
+
+judges:
+  faithfulness:
+    model_id: claude-haiku-4-5-20251001
+    temperature: 0.0
+    max_tokens: 512
+    prompt_version: "v1"
+
+  monitor_full_trace:
+    model_id: claude-haiku-4-5-20251001
+    temperature: 0.0
+    max_tokens: 512
+    prompt_version: "v1"
+
+  monitor_answer_only:
+    model_id: claude-haiku-4-5-20251001
+    temperature: 0.0
+    max_tokens: 512
+    prompt_version: "v1"
+
+  monitor_paraphrase:
+    # Paraphrase step uses a separate call; then the monitor reads the paraphrase.
+    paraphrase_model_id: anthropic/claude-3-haiku-20240307
+    model_id: claude-haiku-4-5-20251001
+    temperature: 0.0
+    max_tokens: 512
+    prompt_version: "v1"
+
+generators:
+  default:
+    model_id: claude-haiku-4-5-20251001   # NOT the subject model
+    temperature: 0.7
+    max_tokens: 2048
+    max_retries_length: 3     # retry count for length-control failures

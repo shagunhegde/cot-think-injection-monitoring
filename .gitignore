@@ -1,0 +1,30 @@
+# Workspace root (resolve_root() default) — all durable artifacts; never committed
+/workspace/
+# Any explicit COTIM_ROOT a dev points elsewhere is their responsibility to ignore
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# HuggingFace / model caches (should live under workspace, but guard anyway)
+hf_cache/
+hf_home/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets — OPENROUTER_API_KEY lives in the environment, never a file
+.env
+*.key
