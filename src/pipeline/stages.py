@@ -620,13 +620,17 @@ def dry_run_report(cfg: dict, paths: Paths) -> None:
     """Print matrix size + per-layer net-new cost estimate (zero spend, no GPU)."""
     cost_cfg = _load_yaml(Path("config/cost.yaml"))
     caches = _caches(paths)
-    items, _, matrix = _items_and_matrix(cfg, paths, caches)
+    # Use a dry-run copy so placeholder items don't trigger baseline/target resolution.
+    dry_cfg = dict(cfg, dry_run=True)
+    items = _load_items(dry_cfg, paths)
+    items_by_hash = {it["item_hash"]: it for it in items}
+    matrix = build_condition_matrix(cfg, [it["item_hash"] for it in items])
     report = cost_estimate(matrix, {k: caches[k] for k in ("baselines", "prefills", "subject", "judge")}, cost_cfg)
     report.dry_run = True
     print(f"\nWorkspace root  : {paths.root}")
     print(f"Run name        : {cfg.get('run_name')}")
     print(f"Items loaded    : {len(items)}")
-    print(f"Matrix size     : {len(matrix)} conditions")
+    print(f"Matrix size     : {len(matrix)} conditions (before target resolution)")
     print(f"Subjects        : {cfg.get('models')}")
     print(f"Attacker        : {cfg.get('generator_model')}")
     mon = cfg.get("monitor", {})

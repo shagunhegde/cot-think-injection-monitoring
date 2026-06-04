@@ -83,7 +83,7 @@ def _load_items(cfg: dict, paths: Paths) -> list[dict]:
 
     if dry_run or not datasets:
         n = n_items or 0
-        return [{"item_hash": f"item_{i}", "question": "", "choices": [], "answer_idx": 0,
+        return [{"item_hash": f"item_{i}", "question": "", "choices": ["A", "B", "C", "D"], "answer_idx": 0,
                  "answer_letter": "A", "subject": "", "split": "test"} for i in range(n)]
 
     items = []
