@@ -1,9 +1,9 @@
 """Stage orchestrator — the config-driven harness entrypoint.
 
-Mirrors the Reasoning-Theater idiom: one YAML config per run (under experiments/),
-per-stage `enabled:` toggles, and a single dispatcher that runs one stage (or all
-enabled stages in a phase). Every stage is a thin wrapper over existing code and maps
-to one cache layer, so reruns recompute nothing already cached.
+One YAML config per run (under experiments/), per-stage `enabled:` toggles, and a
+single dispatcher that runs one stage (or all enabled stages in a phase). Every stage
+is a thin wrapper over existing code and maps to one cache layer, so reruns recompute
+nothing already cached.
 
 Phases & stages
 ---------------
