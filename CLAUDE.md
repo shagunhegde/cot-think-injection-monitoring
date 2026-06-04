@@ -158,7 +158,6 @@ from src.infra.paths import resolve_root; paths = resolve_root()
 ```yaml
 H1 only:    families: [B],    lengths: [100, 300, 700, 1500],  n_items: 50
 H2 only:    families: [B, C], lengths: [100, 700]
-H3 only:    families: [B, D], lengths: [300, 700]
 Smoke:      limit: 1
 No-GPU est: dry_run: true
 Error bars: samples_per_condition: 3   # (3× GPU cost, adds bootstrap CIs)

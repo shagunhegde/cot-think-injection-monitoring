@@ -32,7 +32,7 @@ models:
   - deepseek-r1-distill-qwen-1.5b   # primary subject; start here
 
 # ── Attack grid ──────────────────────────────────────────────────────────────
-families: [B, C, D]             # [B] → H1 only; [B,C] → H2; [B,D] → H3; all for full run
+families: [B, C, D]             # [B] → H1 only; [B,C] → H2; [B,D] 
                                 # A is the monitor-detectability floor, add when calibrating
 
 lengths: [100, 300, 700]         # token lengths in reference_tokenizer

@@ -1,5 +1,5 @@
 # Full sweep — all three hypotheses, subject model sweep, full monitor capability table
-# Families: [B, C, D] — covers H1 / H2 / H3 simultaneously.
+# Families: [B, C, D] — covers H1 / H2 simultaneously.
 # Subjects:  DeepSeek 1.5B + Qwen3-4B (scale sweep).
 # Monitors:  3-model weak→strong sweep (open + closed).
 #

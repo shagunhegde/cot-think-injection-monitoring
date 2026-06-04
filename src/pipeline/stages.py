@@ -57,7 +57,6 @@ log = logging.getLogger(__name__)
 HYPOTHESIS_PRESETS: dict[str, dict] = {
     "H1": {"families": ["B"], "lengths": [100, 300, 700]},
     "H2": {"families": ["B", "C"], "lengths": [100, 700]},
-    "H3": {"families": ["B", "D"], "lengths": [300, 700]},
 }
 
 DATAGEN_STAGES = ["baselines", "prefills", "subject", "clean_baseline"]

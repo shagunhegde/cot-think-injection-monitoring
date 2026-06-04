@@ -64,7 +64,7 @@ plots:        {enabled: true}
 
 ### Hypothesis presets
 
-Set `hypothesis: H1`, `H2`, or `H3` in the config to automatically apply the standard families/lengths for that hypothesis.
+Set `hypothesis: H1` or `H2` in the config to automatically apply the standard families/lengths for that hypothesis.
 
 ---
 
