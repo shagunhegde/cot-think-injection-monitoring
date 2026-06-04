@@ -4,7 +4,6 @@ Measures how robust CoT-based oversight is when an attacker controls part of a m
 
 - **H1** — monitorability degrades non-linearly with injection length
 - **H2** — degradation is content-driven, not mere verbosity (CAS = EEMR(B) − EEMR(C))
-- **H3** — an embedded reflection step changes monitorability
 
 ---
 

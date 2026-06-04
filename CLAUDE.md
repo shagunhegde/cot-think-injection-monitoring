@@ -2,8 +2,7 @@
 <!-- PART 1: Stable project context. Edit in place as architecture evolves. -->
 
 ## Mission
-One research-engineering project: measure how robust CoT-based oversight is when an attacker controls part of a model's `<think>` trace. Three pre-registered hypotheses — **H1** (monitorability degrades non-linearly with injection length), **H2** (degradation is content-driven, not mere verbosity), **H3** (an embedded reflection step changes monitorability; direction not pre-committed). Single framing: an AI-control evaluation with an untrusted model, a blind external monitor, an attack policy (the injection), an attack-cost curve (injection length), and a safety/usefulness frontier. No Stream A / Stream B split anywhere in this codebase.
-
+Measure how robust CoT-based oversight is when an attacker controls part of a model's `<think>` trace. Three pre-registered hypotheses — **H1** (monitorability degrades non-linearly with injection length), **H2** (degradation is content-driven, not mere verbosity)
 ---
 
 ## Repository layout (§8 of spec)
