@@ -5,7 +5,7 @@ Measures how robust CoT-based oversight is when an attacker controls part of a m
 - **H1** — monitorability degrades non-linearly with injection length
 - **H2** — degradation is content-driven, not mere verbosity (CAS = EEMR(B) − EEMR(C))
 
-The mechanistic followup can be found [here]https://colab.research.google.com/drive/17f1KHJZTtw34z0PgD7z4zvrlCfNJ7d-e?usp=sharing
+Notebook for Resolving a CoT-injection override to a sublayer and a handful of heads - https://colab.research.google.com/drive/17f1KHJZTtw34z0PgD7z4zvrlCfNJ7d-e?usp=sharing
 
 ---
 
