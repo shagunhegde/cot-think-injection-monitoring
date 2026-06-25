@@ -6,6 +6,7 @@ Measures how robust CoT-based oversight is when an attacker controls part of a m
 - **H2** — degradation is content-driven, not mere verbosity (CAS = EEMR(B) − EEMR(C))
 
 The mechanistic followup can be found [here]https://colab.research.google.com/drive/17f1KHJZTtw34z0PgD7z4zvrlCfNJ7d-e?usp=sharing
+
 ---
 
 ## Setup
