@@ -1,6 +1,6 @@
 # CoT-Injection Monitoring
 
-[Results and Write up] (https://shagunhegde.github.io/blog/cot-injection.html)
+[Results and Write up](https://shagunhegde.github.io/blog/cot-injection.html)
 [Colab Notebook](https://colab.research.google.com/drive/1zfwi5r1hTSAF-dpSMLVqUhOOn-MzFvEq?usp=sharing)
 
 
