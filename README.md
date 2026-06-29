@@ -1,12 +1,9 @@
 # CoT-Injection Monitoring
 
-Measures how robust CoT-based oversight is when an attacker controls part of a model's `<think>` trace. Two pre-registered hypotheses:
+[Results and Write up] (https://shagunhegde.github.io/blog/cot-injection.html)
+[Colab Notebook](https://colab.research.google.com/drive/1zfwi5r1hTSAF-dpSMLVqUhOOn-MzFvEq?usp=sharing)
 
-- **H1** — monitorability degrades non-linearly with injection length
-- **H2** — degradation is content-driven, not mere verbosity (CAS = EEMR(B) − EEMR(C))
 
-Notebook for Resolving a CoT-injection override to a sublayer and a handful of heads - [link](https://colab.research.google.com/drive/1zfwi5r1hTSAF-dpSMLVqUhOOn-MzFvEq?usp=sharing)
----
 
 ## Setup
 
